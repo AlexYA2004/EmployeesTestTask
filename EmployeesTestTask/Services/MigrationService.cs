@@ -22,6 +22,7 @@ public class MigrationService : IHostedService
         try
         {
             _logger.LogInformation("Applying database migrations...");
+            await context.Database.EnsureCreatedAsync(cancellationToken);
             await context.Database.MigrateAsync(cancellationToken);
             _logger.LogInformation("Database migrations applied successfully");
         }
